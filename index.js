@@ -46,6 +46,10 @@ class Artist {
   get discography() {
     return this.albums.map( album => album.title )
   }
+
+  get songs() {
+    return [].concat.apply( [], this.albums.map( album => album.songs ) )
+  }
 }
 
 class Album {
@@ -53,6 +57,8 @@ class Album {
     this._title = title
     this._artist = artist
     this._songs = songs
+
+    this._artist.albums = [ ...this._artist.albums, this ]
   }
 
   get title() {
