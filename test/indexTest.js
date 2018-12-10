@@ -52,6 +52,7 @@ describe( "index.js", () => {
 
   describe( "Artist", () => {
     let prince
+
     before( () => {
       prince = new Artist( "Prince" )
     } )
@@ -68,12 +69,6 @@ describe( "index.js", () => {
       prince.name = "the artist formerly known as Prince"
       expect( prince.name ).to.equal( "the artist formerly known as Prince" )
       expect( prince._name ).to.equal( "the artist formerly known as Prince" )
-    } )
-
-    it( "has a `discography` getter that lists the titles of all albums belonging to an artist", () => {
-      prince.albums = [ ...prince.albums, new Album( "Purple Rain", prince, [ new Song( "Purple Rain", prince, new Genre( "Rock" ) ) ] ) ]
-      prince.albums = [ ...prince.albums, new Album( "1999", prince, [ new Song( "1999", prince, new Genre( "Funk" ) ) ] ) ]
-      expect( prince.discography ).to.eql( [ "Purple Rain", "1999" ] )
     } )
   } )
 
@@ -113,4 +108,66 @@ describe( "index.js", () => {
     } )
   } )
 
+  describe( "Artist continued", () => {
+    let prince
+    let purpleRain
+    let takeMeWithU
+    let nineteenNinetyNine
+    let littleRedCorvette
+
+    before( () => {
+      prince = new Artist( "Prince" )
+
+      purpleRain = new Song( "Purple Rain", prince, new Genre( "Rock" ) )
+      takeMeWithU = new Song( "Take Me With U", prince, new Genre( "Soul" ) )
+      nineteenNinetyNine = new Song( "1999", prince, new Genre( "Funk" ) )
+      littleRedCorvette = new Song( "Little Red Corvette", prince, new Genre( "Pop" ) )
+
+      prince.albums = [ ...prince.albums, new Album( "Purple Rain", prince, [ purpleRain, takeMeWithU ] ) ]
+      prince.albums = [ ...prince.albums, new Album( "1999", prince, [ nineteenNinetyNine, littleRedCorvette ] ) ]
+
+    } )
+
+    it( "has a `discography` getter that lists the titles of all albums belonging to an artist", () => {
+      expect( prince.discography ).to.eql( [ "Purple Rain", "1999" ] )
+    } )
+
+    it( "has a `songs` getter that returns an array of all song instances belonging to an artist", () => {
+      expect( prince.songs.length ).to.equal( 4 )
+
+      expect( prince.songs ).to.include( purpleRain, takeMeWithU, nineteenNinetyNine, littleRedCorvette )
+    } )
+  } )
+
+  describe( "Album continued", () => {
+    let rock
+    let pop
+    let funk
+    let newWave
+    let artist
+    let nineteenNinetyNine
+    let littleRedCorvette
+    let delirious
+    let letsPretendWereMarried
+    let album
+
+    before( () => {
+      rock = new Genre( "Rock" )
+      pop = new Genre( "Pop" )
+      funk = new Genre( "Funk" )
+      newWave = new Genre( "New Wave" )
+      prince = new Artist( "Prince" )
+
+      nineteenNinetyNine = new Song( "1999", prince, funk )
+      littleRedCorvette = new Song( "Little Red Corvette", prince, pop )
+      delirious = new Song( "Delirious", prince, funk )
+      letsPretendWereMarried = new Song( "Let's Pretend We're Married", prince, newWave )
+
+      album = new Album( "1999", prince, [ nineteenNinetyNine, littleRedCorvette, delirious, letsPretendWereMarried ] )
+    } )
+
+    it( "when created, the album gets added to the `_albums` array belonging to the artist", () => {
+      expect( prince.albums ).to.include( album )
+    } )
+  } )
 } )
