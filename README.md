@@ -12,9 +12,9 @@ add _albums_ as well as some additional behaviors for our `Artist` class.
 
 ## Instructions
 
-For this application, we will be individual song will keep track of its artist
-and genre, just as before. The new `Album` class will contain collections of
-songs. The new `Artist` class will contain some additional behaviors, but
+For this application, individual songs will be used to keep track of its artist
+and genre, just as before. The new `Album` class will contain _collections_ of
+songs. The new `Artist` class will also contain some additional behaviors, but
 these should be added last, as they will rely on `Album`.
 
 - The `Genre` class should take in one parameter, `name` and assign it to a
