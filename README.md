@@ -19,7 +19,7 @@ these should be added last, as they will rely on `Album`.
 
 - The `Genre` class should take in one parameter, `name` and assign it to a
   private property, `_name`. `Genre` should have a getter, `name` that returns
-  the private property.
+  `_name`.
 
 - The `Artist` class should also take in one parameter, `name`, and assign it
   to a private property, `_name`. `Artist` should have a getter and setter for
@@ -29,7 +29,15 @@ these should be added last, as they will rely on `Album`.
   artist, and an instance of a genre. These should be assigned to three private
   properties, `_title`, `_artist`, and `_genre`. `Song` should have a `caption`
   getter that takes the title, artist name and genre name and interpolates them
-  into a single sentence. In example, for the song "Don't Stop Me Now" by "Queen":
+  into a single sentence.
+
+  ```js
+  let queen = new Artist('Queen');
+  let popRock = new Genre('Pop Rock');
+  let dontStopMeNow = new Song("Don't Stop Me Now", queen, popRock);
+  dontStopMeNow.caption;
+  // => 'Don't Stop Me Now by Queen (Pop Rock)'
+  ```
 
 - The `Album` class should take in a title, an instance of an `Artist`
   and an array of `Song` instances, an assign these to private properties.
@@ -50,8 +58,8 @@ features to `Artist`:
 - Create a getter and setter for `albums` that will either return an array
   of `Album` instances, or take in an array of `Album`s and assign it to the
   `_albums` property.
-- Create a `discography` getter that returns the title of each album belonging
-  to an artist
+- Create a `discography` getter that returns the **title** of each album
+  belonging to an artist
 - Create a `songs` getter that returns an array of _all_ `Song` instances from
   all albums belonging to an artist
 
